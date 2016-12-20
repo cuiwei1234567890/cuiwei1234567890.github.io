@@ -4,12 +4,12 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>页面的收获 | CW</title>
+    <title>maven | CW</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="CuiW">
     
-    <meta name="description" content="今天写了个静态的qq音乐播放页面。hiahia~下周继续学习前端知识。">
+    <meta name="description" content="今天尝试了一下maven搭建工程，总结了几个注意点：  1.远程仓库下载太慢的解决方法是在settings.xml中配置maven镜像  可以配置阿里云镜像          alimaven      aliyun maven      http://maven.aliyun.com/nexus/">
     
     
     
@@ -65,15 +65,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/12/16/post-2/" title="页面的收获" itemprop="url">页面的收获</a>
+      <a href="/2016/12/20/post-3/" title="maven" itemprop="url">maven</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://yoursite.com" title="CuiW">CuiW</a>
     </p>
   <p class="article-time">
-    <time datetime="2016-12-16T09:08:06.000Z" itemprop="datePublished">2016-12-16</time>
-    Updated:<time datetime="2016-12-16T09:18:34.588Z" itemprop="dateModified">2016-12-16</time>
+    <time datetime="2016-12-20T01:07:26.000Z" itemprop="datePublished">2016-12-20</time>
+    Updated:<time datetime="2016-12-20T01:22:10.270Z" itemprop="dateModified">2016-12-20</time>
     
   </p>
 </header>
@@ -85,7 +85,10 @@
 		
 		</div>
 		
-		<p>今天写了个静态的qq音乐播放页面。hiahia~<br>下周继续学习前端知识。</p>
+		<p>  今天尝试了一下maven搭建工程，总结了几个注意点：<br>  1.远程仓库下载太慢的解决方法是在settings.xml中配置maven镜像  可以配置阿里云镜像<br>    <mirror><br>      <id>alimaven</id><br>      <name>aliyun maven</name><br>      <url><a href="http://maven.aliyun.com/nexus/content/groups/public/" target="_blank" rel="external">http://maven.aliyun.com/nexus/content/groups/public/</a></url><br>      <mirrorof>central</mirrorof><br>    </mirror><br>    注：亲测有效</p>
+<p>  2.搭建本地仓库 在在conf中settings.xml拷贝到你本地新建的文件夹然后修改settings中的localresp 改为本地路径即可</p>
+<p>  3.pom、jar、war的区别：<br>    jar文件包括java普通类、资源文件和普通文件<br>    war文件包括全部的web应用程序（war包引用war包 重名的文件会被替换）<br>    pom 聚合文件（父项目的打包方式）</p>
+<p>  4.常用命令<br>   创建Maven的普通java项目：<br>   mvn archetype:create<br>   -DgroupId=packageName<br>   -DartifactId=projectName<br>    创建Maven的Web项目：<br>    mvn archetype:create<br>    -DgroupId=packageName<br>    -DartifactId=webappName<br>    -DarchetypeArtifactId=maven-archetype-webapp<br>    编译源代码： mvn compile<br>    编译测试代码：mvn test-compile<br>    运行测试：mvn test<br>    产生site：mvn site<br>    打包：mvn package<br>    在本地Repository中安装jar：mvn install<br>    清除产生的项目：mvn clean<br>    生成eclipse项目：mvn eclipse:eclipse<br>    生成idea项目：mvn idea:idea<br>    组合使用goal命令，如只打包不测试：mvn -Dtest package<br>    编译测试的内容：mvn test-compile<br>    只打jar包: mvn jar:jar<br>    只测试而不编译，也不测试编译：mvn test -skipping compile -skipping test-compile<br>     ( -skipping 的灵活运用，当然也可以用于其他组合命令)<br>    清除eclipse的一些系统设置:mvn eclipse:clean </p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -95,7 +98,7 @@
 
 <div class="article-share" id="share">
 
-  <div data-url="http://yoursite.com/2016/12/16/post-2/" data-title="页面的收获 | CW" data-tsina="null" class="share clearfix">
+  <div data-url="http://yoursite.com/2016/12/20/post-3/" data-title="maven | CW" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -104,19 +107,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/12/20/post-3/" title="maven">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  maven</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2016/12/14/post-1/"  title="Rest简介">
+<a href="/2016/12/16/post-2/"  title="页面的收获">
  <strong>NEXT:</strong><br/> 
- <span>Rest简介
+ <span>页面的收获
 </span>
 </a>
 </div>
@@ -125,7 +120,7 @@
 
 	
 <section class="comment">
-	<!-- 多说评论框 start --> <div class="ds-thread" data-thread-key="2016/12/16/post-2/" data-title="页面的收获" data-url="http://cuiwei1234567890.github.io/http://yoursite.com/2016/12/16/post-2/"></div> <!-- 多说评论框 end --> <!-- 多说公共JS代码 start (一个网页只需插入一次) --> <script type="text/javascript"> var duoshuoQuery = {short_name:"cuiw"}; (function() { var ds = document.createElement('script'); ds.type = 'text/javascript';ds.async = true; ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js'; ds.charset = 'UTF-8'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds); })(); </script> <!-- 多说公共JS代码 end --> 
+	<!-- 多说评论框 start --> <div class="ds-thread" data-thread-key="2016/12/20/post-3/" data-title="maven" data-url="http://cuiwei1234567890.github.io/http://yoursite.com/2016/12/20/post-3/"></div> <!-- 多说评论框 end --> <!-- 多说公共JS代码 start (一个网页只需插入一次) --> <script type="text/javascript"> var duoshuoQuery = {short_name:"cuiw"}; (function() { var ds = document.createElement('script'); ds.type = 'text/javascript';ds.async = true; ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js'; ds.charset = 'UTF-8'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds); })(); </script> <!-- 多说公共JS代码 end --> 
 </section>
 
 </div>  
