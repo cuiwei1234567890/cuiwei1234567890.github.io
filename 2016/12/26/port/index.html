@@ -4,14 +4,17 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>spring boot | CW</title>
+    <title>Socket通信 | CW</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="CuiW">
     
-    <meta name="description" content="spring boot简单来说就是springmvc的一个升级版 大大简化了spring应用的初始搭建 
-        org.springframework.boot        spring-boot-starter-parent        1.4.2.RELEASE         
-">
+    <meta name="description" content="所谓socket 通常也称作”套接字“，用于描述IP地址和端口，是一个通信链的句柄。应用程序通常通过”套接字”向网络发出请求或者应答网络请求。
+
+通信模型的各个步骤如下:
+
+在服务端建立一个ServerSocket,绑定相应的端口，并且在指定的端口进行侦听，等待客户端的连接。
+当客户端创建连接Soc">
     
     
     
@@ -67,15 +70,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/12/20/post-4/" title="spring boot" itemprop="url">spring boot</a>
+      <a href="/2016/12/26/port/" title="Socket通信" itemprop="url">Socket通信</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://yoursite.com" title="CuiW">CuiW</a>
     </p>
   <p class="article-time">
-    <time datetime="2016-12-20T09:08:19.000Z" itemprop="datePublished">2016-12-20</time>
-    Updated:<time datetime="2016-12-20T09:19:24.049Z" itemprop="dateModified">2016-12-20</time>
+    <time datetime="2016-12-26T07:54:11.000Z" itemprop="datePublished">2016-12-26</time>
+    Updated:<time datetime="2016-12-26T07:59:52.028Z" itemprop="dateModified">2016-12-26</time>
     
   </p>
 </header>
@@ -87,19 +90,33 @@
 		
 		</div>
 		
-		<p>spring boot简单来说就是springmvc的一个升级版 大大简化了spring应用的初始搭建 </p>
-<p><parent><br>        <groupid>org.springframework.boot</groupid><br>        <artifactid>spring-boot-starter-parent</artifactid><br>        <version>1.4.2.RELEASE</version><br>        <relativepath> <!-- lookup parent from repository --><br></relativepath></parent></p>
-<dependencies><br>        <dependency><br>            <groupid>org.springframework.boot</groupid><br>            <artifactid>spring-boot-starter-web</artifactid><br>        </dependency><br><br>        <dependency><br>            <groupid>org.springframework.boot</groupid><br>            <artifactid>spring-boot-starter-test</artifactid><br>            <scope>test</scope><br>        </dependency><br></dependencies>    
+		<pre><code>所谓socket 通常也称作”套接字“，用于描述IP地址和端口，是一个通信链的句柄。应用程序通常通过”套接字”向网络发出请求或者应答网络请求。
 
-<p>内嵌tomcat 直接运行main方法<br>@SpringBootApplication<br>public class DemoApplication {</p>
-<pre><code>public static void main(String[] args) {
-    SpringApplication.run(DemoApplication.class, args);
-}
-</code></pre><p>}</p>
-<p>接口调试可以通过火狐的httprequester工具  </p>
-<p>常用的一些注解：<br>@RestController(相当于@Controller和@responseBody)<br>@RequestMapping(请求映射)<br>可以用@PostMapping/@GetMapping/….简化注解</p>
-<p>配置文件建议用yml文件</p>
-  
+通信模型的各个步骤如下:
+
+在服务端建立一个ServerSocket,绑定相应的端口，并且在指定的端口进行侦听，等待客户端的连接。
+</code></pre><p>当客户端创建连接Socket并且向服务端发送请求。<br>服务器收到请求，并且接受客户端的请求信息。一旦接收到客户端的连接请求后，会创建一个连接socket，用来与客户端的socket进行通信。通过相应的输入/输出流进行数据的交换，数据的发送接收以及数据的响应等等。<br>当客户端和服务端通信完毕后，需要分别关闭socket，结束通信。<br>也就是基于服务器和客户端的开发，所以在服务器端和客户端我们分别需要完成的代码就是:<br>    对于服务器端需要完成的工作是:<br>        创建ServerSocket对象，绑定监听器<br>        通过accept（）方法监听客户端请求<br>        连接建立以后通过读取客户端发送请求消息<br>        通过输出流向客户端发送响应信息<br>        关闭资源</p>
+<pre><code>ServerSocket类中涉及到的常用方法:
+    ServerSocket(int port)——创建并绑定到特定端口的服务器套接字
+    accept()——侦听并接受到此套接字的连接
+    close()——关闭此套接字
+    getInetAddress()——得到ServerSocket对象绑定的IP地址。如果ServerSocket对象未绑定IP地址，返回0.0.0.0
+    getLocalPort()——返回此套接字在其上侦听的端口
+
+客户端需要完成的工作是:
+    创建Socket对象，指明需要连接的服务器地址和端口号(1023以后的端口,因为0~1023之间的端口号是我们系统需要使用的端口号)
+    连接建立后，通过输出流向服务器端请求
+    通过输入流获取服务器响应信息
+    关闭资源
+
+Socket类中常用的方法:
+    Socket(InetAddress address, int port)——创建一个套接字并将其连接到指定ip地址的指定端口号
+    Socket(String host, int port)——创建一个套接字并将其连接到指定主机上的指定端口号
+    close()——关闭此套接字
+    getInetAddress()——返回套接字连接的地址
+    getInputStream()——返回此套接字的输入流
+    getOutputStream——返回此套接字的输出流
+</code></pre>  
 	</div>
 		<footer class="article-footer clearfix">
 
@@ -108,7 +125,7 @@
 
 <div class="article-share" id="share">
 
-  <div data-url="http://yoursite.com/2016/12/20/post-4/" data-title="spring boot | CW" data-tsina="null" class="share clearfix">
+  <div data-url="http://yoursite.com/2016/12/26/port/" data-title="Socket通信 | CW" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -117,19 +134,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/12/26/port/" title="Socket通信">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  Socket通信</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2016/12/20/post-3/"  title="maven">
+<a href="/2016/12/20/post-4/"  title="spring boot">
  <strong>NEXT:</strong><br/> 
- <span>maven
+ <span>spring boot
 </span>
 </a>
 </div>
@@ -138,7 +147,7 @@
 
 	
 <section class="comment">
-	<!-- 多说评论框 start --> <div class="ds-thread" data-thread-key="2016/12/20/post-4/" data-title="spring boot" data-url="http://cuiwei1234567890.github.io/http://yoursite.com/2016/12/20/post-4/"></div> <!-- 多说评论框 end --> <!-- 多说公共JS代码 start (一个网页只需插入一次) --> <script type="text/javascript"> var duoshuoQuery = {short_name:"cuiw"}; (function() { var ds = document.createElement('script'); ds.type = 'text/javascript';ds.async = true; ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js'; ds.charset = 'UTF-8'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds); })(); </script> <!-- 多说公共JS代码 end --> 
+	<!-- 多说评论框 start --> <div class="ds-thread" data-thread-key="2016/12/26/port/" data-title="Socket通信" data-url="http://cuiwei1234567890.github.io/http://yoursite.com/2016/12/26/port/"></div> <!-- 多说评论框 end --> <!-- 多说公共JS代码 start (一个网页只需插入一次) --> <script type="text/javascript"> var duoshuoQuery = {short_name:"cuiw"}; (function() { var ds = document.createElement('script'); ds.type = 'text/javascript';ds.async = true; ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js'; ds.charset = 'UTF-8'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds); })(); </script> <!-- 多说公共JS代码 end --> 
 </section>
 
 </div>  
